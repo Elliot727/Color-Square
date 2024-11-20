@@ -1,66 +1,174 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Color Palette Generator</title>
     <style>
       body {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-          sans-serif;
-        margin: 20px;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(145deg, #d6e4f0, #c4d9e8);
       }
+
+      .container {
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px;
+        width: 100%;
+        max-width: 500px;
+        height: 500px;
+        box-sizing: border-box;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      h1 {
+        font-size: 22px;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      p {
+        font-size: 14px;
+        text-align: center;
+        color: #7f8c8d;
+        margin-bottom: 15px;
+        line-height: 1.4;
+      }
+
+      code {
+        font-family: "Courier New", monospace;
+        background-color: #f1f1f1;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+
+      .input-wrapper {
+        position: relative;
+        margin-top: 12px;
+      }
+
+      input,
       textarea {
         width: 100%;
-        height: 200px;
-        font-size: 16px;
-        padding: 10px;
+        padding: 12px;
+        margin-top: 8px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
         box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        resize: none;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background-color: #f9f9f9;
       }
+
+      input:focus,
+      textarea:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+        outline: none;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      input:not(:placeholder-shown) + label,
+      textarea:not(:placeholder-shown) + label {
+        top: -12px;
+        font-size: 12px;
+        color: #3498db;
+      }
+
+      label {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 14px;
+        color: #7f8c8d;
+        transition: all 0.3s ease;
+        pointer-events: none;
+      }
+
+      textarea {
+        resize: vertical;
+        height: 120px;
+      }
+
       button {
-        background-color: #4caf50;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin-top: 10px;
-        cursor: pointer;
-      }
-      input {
         width: 100%;
-        padding: 10px;
+        padding: 14px;
         font-size: 16px;
-        margin-top: 10px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        font-weight: bold;
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 12px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #27ae60, #2ecc71);
+        transform: translateY(-3px);
+      }
+
+      button:active {
+        transform: translateY(1px);
+      }
+
+      .footer {
+        text-align: center;
+        font-size: 12px;
+        color: #95a5a6;
+        margin-top: 15px;
+        font-style: italic;
       }
     </style>
   </head>
   <body>
-    <h1>Color Palette Generator</h1>
-    <p>
-      Enter your colors and names, one per line, in the format:
-      <code>#RRGGBB - Name</code>
-    </p>
+    <div class="container">
+      <h1>Color Palette Generator</h1>
+      <p>
+        Enter your colors and names, one per line, in the format:
+        <code>#RRGGBB - Name</code>
+      </p>
 
-    <!-- Add input field for palette name -->
-    <input id="paletteName" type="text" placeholder="Enter palette name" />
+      <!-- Palette Name Input -->
+      <div class="input-wrapper">
+        <input id="paletteName" type="text" placeholder=" " />
+        <label for="paletteName">Enter Palette Name</label>
+      </div>
 
-    <textarea
-      id="colorInput"
-      placeholder="Enter colors and names here..."
-    ></textarea>
-    <button id="generateButton">Generate Palette</button>
+      <!-- Color Input Textarea -->
+      <div class="input-wrapper">
+        <textarea id="colorInput" placeholder=" "></textarea>
+        <label for="colorInput">Enter Colors and Names</label>
+      </div>
+
+      <!-- Generate Button -->
+      <button id="generateButton">Generate Palette</button>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>Designed with ❤️ for seamless color palettes</p>
+      </div>
+    </div>
 
     <script>
-      // Add an event listener to the button
       document
         .getElementById("generateButton")
         .addEventListener("click", () => {
